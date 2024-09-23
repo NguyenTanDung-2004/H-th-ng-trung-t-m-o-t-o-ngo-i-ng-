@@ -14,14 +14,13 @@ const CustomButton: React.FC<Props> = ({ title, onPress, primary, secondary }) =
       onPress={onPress}
       style={styles.button}
     >
-      <Text>{title}</Text>
+      <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   button: {
-    paddingVertical: 12,
     paddingHorizontal: 30,
     borderRadius: 25,
     marginBottom: 10,
@@ -44,6 +43,11 @@ const styles = StyleSheet.create({
   secondaryButtonText: {
     color: '#FFFFFF',
   },
+  text: {
+    fontWeight: 'bold',
+    color: '#153AD1',
+    fontSize: 17,
+  }
 });
 
 export default CustomButton;

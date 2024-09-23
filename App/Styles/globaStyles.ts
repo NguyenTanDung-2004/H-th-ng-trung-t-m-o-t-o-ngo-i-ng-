@@ -9,23 +9,25 @@ export const styles = StyleSheet.create({
     padding: 20,
   },
   welcomeImage: {
-    width: 150,
-    height: 150,
-    borderRadius: 75,
+    width: 290,
+    height: 290,
+    borderRadius: 200,
     marginBottom: 20,
   },
   title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
+    fontSize: 32,
+    color: '#Ffc000',
     marginBottom: 10,
-    textAlign: 'center',
+    textAlign: 'left',
+    width: 314,
+    fontFamily: 'Inter-Bold',
   },
   subtitle: {
-    fontSize: 16,
+    fontSize: 17,
     color: '#FFFFFF',
     marginBottom: 30,
-    textAlign: 'center',
+    textAlign: 'left',
+    width: 314,
   },
   input: {
     backgroundColor: '#FFFFFF',
@@ -54,3 +56,28 @@ export const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
 });
+
+// styles for button in WelcomeScreen
+export const welcomeStyles = StyleSheet.create({
+  logginButton: {
+    width: 318,
+    height: 60,
+    borderRadius: 60,
+    paddingTop: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    marginBottom: 30,
+
+  },
+  registerButton: {
+    backgroundColor: '#ffc000',
+    width: 318,
+    height: 60,
+    borderRadius: 60,
+    paddingTop: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 30,
+  }
+})
