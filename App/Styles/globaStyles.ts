@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
     padding: 20,
   },
   welcomeImage: {
+    marginTop:30,
     width: 290,
     height: 290,
     borderRadius: 200,

@@ -19,7 +19,7 @@ const WelcomeScreen: React.FC<Props> = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Image
-                source={require('../../assets/images/image.png')}
+                source={require('../../assets/images/welcomeImage.png')}
                 style={styles.welcomeImage}
             />
             <Text style={styles.title}>Hãy đăng nhập để bắt đầu</Text>
