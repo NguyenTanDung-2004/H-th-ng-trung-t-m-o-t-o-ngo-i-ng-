@@ -1,26 +1,57 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, Alert } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../Navigation/AppNavigator';
 import CustomButton from '../Components/CustomButton';
 import { styles } from '../Styles/globaStyles';
 import { MaterialIcons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 
-type WelcomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Login'>;
 
-type Props = {
-    navigation: WelcomeScreenNavigationProp;
-};
 
 const LoginScreen: React.FC = () => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+   
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
+
+
+
+    const route = useRoute<RouteProp<RootStackParamList>>(); // Passing parameters to routes
+
+    const [users, setUsers] = useState<userInfo[]>([
+        {
+            keyInfo: 'abc@gmail.com',
+            fullName: 'ABC',
+            accName: 'abc',
+            password: '12345678',
+        }
+    ]); // set list of account with a default value
+
+    useEffect(() => {
+        if (route.params?.keyInfo) { // check if keyInfo updated -> having a registration
+
+            setUsers([...users, {
+                keyInfo: route.params?.keyInfo,
+                fullName: route.params?.fullName,
+                accName: route.params?.accName,
+                password: route.params?.password,
+            }]) // replace list with new account 
+        }
+    }, [route.params?.keyInfo]); // value from component used inside of the function.
+
     const handleLogin = () => {
+        for (let i = 0; i < users.length; i++) {
+            if (email == users[i].keyInfo && password == users[i].password
+                && email.startsWith('hocvien')) {
+                    navigation.navigate('Role')
+            }
+        } // check Student Role
+    
+
         const validEmail = "abc@gmail.com";
         const validPassword = "12345678";
         if (email !== validEmail) {
@@ -56,34 +87,34 @@ const LoginScreen: React.FC = () => {
                 value={email}
                 onChangeText={setEmail}
             />
-            <View style={styles.passwordContainer}> 
+            <View style={styles.passwordContainer}>
                 <TextInput
                     style={styles.input}
                     placeholder="Mật khẩu"
-                    secureTextEntry={!showPassword} 
+                    secureTextEntry={!showPassword}
                     value={password}
                     onChangeText={setPassword}
                 />
-                <TouchableOpacity 
+                <TouchableOpacity
                     style={styles.eyeButton}
                     onPress={() => setShowPassword(!showPassword)}
                 >
-                    <MaterialIcons 
-                        name={showPassword ? 'visibility' : 'visibility-off'} 
-                        size={24} 
-                        color="gray" 
+                    <MaterialIcons
+                        name={showPassword ? 'visibility' : 'visibility-off'}
+                        size={24}
+                        color="gray"
                     />
                 </TouchableOpacity>
             </View>
-            <View style={styles.checkbox}>            
+            <View style={styles.checkbox}>
                 <TouchableOpacity onPress={() => setRememberMe(!rememberMe)}>
-                <View style={styles.checkboxBackground}></View>
-                    <MaterialIcons 
-                        name={rememberMe ? 'check-box' : 'check-box-outline-blank'} 
-                        size={24} 
-                        color="white" 
+                    <View style={styles.checkboxBackground}></View>
+                    <MaterialIcons
+                        name={rememberMe ? 'check-box' : 'check-box-outline-blank'}
+                        size={24}
+                        color="white"
                     />
-                </TouchableOpacity> 
+                </TouchableOpacity>
                 <Text style={[styles.checkboxLabel, { color: 'white' }]}>Nhớ mật khẩu</Text>
             </View>
             <View style={styles.loginButton}>
@@ -107,23 +138,23 @@ const LoginScreen: React.FC = () => {
             <View style={styles.socialButtons}>
                 {/* Thêm nút đăng nhập mạng xã hội ở đây */}
                 <TouchableOpacity onPress={() => handlePress('gmail')}>
-                <Image
-                    source={require('../../assets/images/gmail.png')}
-                    style={{ width: 40, height: 40 }} 
-                />            
+                    <Image
+                        source={require('../../assets/images/gmail.png')}
+                        style={{ width: 40, height: 40 }}
+                    />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => handlePress('facebook')}>
-                <Image
-                    source={require('../../assets/images/facebook.png')}
-                    style={{ width: 40, height: 40 }} 
-                />                
+                    <Image
+                        source={require('../../assets/images/facebook.png')}
+                        style={{ width: 40, height: 40 }}
+                    />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => handlePress('google')}>
-                <Image
-                    source={require('../../assets/images/google.png')}
-                    style={{ width: 40, height: 40 }}
-                />
-                </TouchableOpacity>   
+                    <Image
+                        source={require('../../assets/images/google.png')}
+                        style={{ width: 40, height: 40 }}
+                    />
+                </TouchableOpacity>
             </View>
         </View>
     );
