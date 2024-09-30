@@ -8,9 +8,9 @@ import RoleScreen from '../Screens/RoleScreen';
 
 export type RootStackParamList = {
   Welcome: undefined;
-  Login: undefined|userInfo; // set for passing param
+  Login: undefined | userInfo; // set for passing param
   Register: undefined; // add RegisterScreen
-  Role:undefined; // add RoleScreen
+  Role: undefined | userInfo; // add RoleScreen
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -22,10 +22,10 @@ const AppNavigator: React.FC = () => (
       <Stack.Screen name="Login" component={LoginScreen} />
 
       {/* add Register Screen*/}
-      <Stack.Screen name="Register" component={RegisterScreen} /> 
-      
+      <Stack.Screen name="Register" component={RegisterScreen} />
+
       {/* add Role Screen*/}
-      <Stack.Screen name="Role" component={RoleScreen} /> 
+      <Stack.Screen name="Role" component={RoleScreen} />
     </Stack.Navigator>
   </NavigationContainer>
 );

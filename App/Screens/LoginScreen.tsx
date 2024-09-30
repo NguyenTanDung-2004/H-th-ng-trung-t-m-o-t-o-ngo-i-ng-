@@ -11,16 +11,18 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 
 const LoginScreen: React.FC = () => {
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
-   
+
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [pwd, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
-
-
-
     const route = useRoute<RouteProp<RootStackParamList>>(); // Passing parameters to routes
+
+    const keyInfo = route.params?.keyInfo
+    const fullName = route.params?.fullName
+    const accName = route.params?.accName
+    const password = route.params?.password
 
     const [users, setUsers] = useState<userInfo[]>([
         {
@@ -35,10 +37,10 @@ const LoginScreen: React.FC = () => {
         if (route.params?.keyInfo) { // check if keyInfo updated -> having a registration
 
             setUsers([...users, {
-                keyInfo: route.params?.keyInfo,
-                fullName: route.params?.fullName,
-                accName: route.params?.accName,
-                password: route.params?.password,
+                keyInfo: keyInfo,
+                fullName: fullName,
+                accName: accName,
+                password: password,
             }]) // replace list with new account 
         }
     }, [route.params?.keyInfo]); // value from component used inside of the function.
@@ -46,11 +48,11 @@ const LoginScreen: React.FC = () => {
     const handleLogin = () => {
         for (let i = 0; i < users.length; i++) {
             if (email == users[i].keyInfo && password == users[i].password
-                && email.startsWith('hocvien')) {
-                    navigation.navigate('Role')
+                && email.startsWith('ph')) {
+                navigation.navigate('Role', { keyInfo: keyInfo, fullName: fullName, accName: accName, password: password })
             }
-        } // check Student Role
-    
+        } // check Parent Role
+
 
         const validEmail = "abc@gmail.com";
         const validPassword = "12345678";
@@ -92,7 +94,7 @@ const LoginScreen: React.FC = () => {
                     style={styles.input}
                     placeholder="Mật khẩu"
                     secureTextEntry={!showPassword}
-                    value={password}
+                    value={pwd}
                     onChangeText={setPassword}
                 />
                 <TouchableOpacity

@@ -16,6 +16,7 @@ const RegisterScreen: React.FC = () => {
   const [fullName, setFullName] = useState('');
   const [accName, setAccName] = useState('');
   const [password, setPassword] = useState('');
+  const [rePassword, setRePassword] = useState('');
  
   const [showPassword, setShowPassword] = useState(false);
 
@@ -26,6 +27,7 @@ const RegisterScreen: React.FC = () => {
     setFullName('')
     setAccName('')
     setPassword('')
+    setRePassword('')
   }
 
   const handlePress = (socialMedia: string) => {
@@ -79,8 +81,8 @@ const RegisterScreen: React.FC = () => {
           style={styles.input}
           placeholder="Nhập lại mật khẩu"
           secureTextEntry={!showPassword}
-          value={password}
-          onChangeText={setPassword}
+          value={rePassword}
+          onChangeText={setRePassword}
         />
         <TouchableOpacity
           style={styles.eyeButton}
