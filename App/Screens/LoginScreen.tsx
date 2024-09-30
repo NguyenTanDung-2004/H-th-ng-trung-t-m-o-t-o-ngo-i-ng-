@@ -84,9 +84,11 @@ const LoginScreen: React.FC = () => {
             else {
                 navigation.navigate('Schedule')
             }
+
+            setEmail('')
+            setPassword('')
         }
-        setEmail('')
-        setPassword('')
+
 
         // const validEmail = "abc@gmail.com";
         // const validPassword = "12345678";
